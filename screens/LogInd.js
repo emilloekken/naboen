@@ -1,3 +1,4 @@
+//Importerer de dependencies som skal anvendes
 import { useNavigation } from '@react-navigation/core'
 import React, { useState, useEffect } from 'react'
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
@@ -10,6 +11,7 @@ const LogInd = () => {
 
     const navigation = useNavigation()
 
+//Gør brug af useeffects og handlers, definerer hvad funktionerne skal gøre med input f.eks.
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
@@ -19,6 +21,7 @@ const LogInd = () => {
         return unsubscribe
     }, [])
 
+    //funktion til at oprette bruger, anvender funktionen "createuserwithemailandpassword", som er en indbygget firebase funktion
     const handleOpretBruger = () => {
         auth
         .createUserWithEmailAndPassword(email, kodeord)
@@ -29,6 +32,7 @@ const LogInd = () => {
         .catch(error => alert(error.message))
     }
 
+//funktion til at logge ind, bruger igen signInWithEmailAndPassword, som er en indbygget firebase funktion
     const handleLogInd = () => {
         auth
         .signInWithEmailAndPassword(email, kodeord)
@@ -39,6 +43,7 @@ const LogInd = () => {
         .catch(error => alert(error.message))
     }
 
+    //Her opsættes vores forskellige containers, med input, såsom knappen til at logge ind eller oprette bruger
     return (
         <KeyboardAvoidingView
         style={styles.container}
@@ -63,7 +68,6 @@ const LogInd = () => {
 
                 
             </View>
-
             <View style={styles.buttonContainer}>
                 <TouchableOpacity
                     onPress={handleLogInd}
